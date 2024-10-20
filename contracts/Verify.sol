@@ -74,7 +74,11 @@ contract CertificateVerify is ERC721, Ownable {
             return msg.sender; 
         }
 
-
+    function getCertificateStatus(uint256 tokenId) external view returns (CertificateStatus) {
+        require(tokenId < nextTokenId, "Invalid token ID");
+        return certificates[tokenId].status;
+    }
+    
     function getUserCertificates(address user) external view returns (Certificate[] memory) {
             uint256[] memory tokenIds = userCertificates[user];
             uint256 length = tokenIds.length;
